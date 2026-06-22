@@ -1,4 +1,4 @@
-import pygame
+from Code.Game import Game
 
-pygame.init()
-window = pygame.display.set_mode(size = (600, 400))
+game = Game()
+game.run()

@@ -1,0 +1,12 @@
+#C
+COLOR_YELLOW = (230, 191, 38)
+COLOR_WHITE = (255, 255, 255)
+
+#M
+MENU_OPTION = ('NEW GAME',
+               'SCORE',
+               'EXIT')
+
+#W
+WINDOW_WIDTH = 700
+WINDOW_HEIGHT = 394
