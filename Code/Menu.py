@@ -10,7 +10,7 @@ from Code.Const import MENU_OPTION, COLOR_WHITE, COLOR_YELLOW, COLOR_GREEN, WIN_
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('./Asset/demo.jpg')
+        self.surf = pygame.image.load('./Asset/demo.jpg').convert_alpha()
         self.rect = self.surf.get_rect(left = 0, top= 0)
 
     def run(self, ):
