@@ -6,8 +6,11 @@ from pygame import Surface, Rect
 from pygame.font import Font
 
 from Code.Const import COLOR_WHITE, WIN_HEIGHT, EVENT_ENEMY
+from Code.Enemy import Enemy
 from Code.Entity import Entity
 from Code.EntityFactory import EntityFactory
+from Code.EntityMediator import EntityMediator
+from Code.Player import Player
 
 
 class Level:
@@ -20,8 +23,8 @@ class Level:
         self.entity_list.extend(EntityFactory.get_entity('summer'))
         self.entity_list.extend(EntityFactory.get_entity('player'))
         self.timeout = 20000 #20 Seconds
-        self.spawn_timer = 0
-        self.spawn_cooldown = 3000
+        self.spawn_timer = 2000
+        self.spawn_cooldown = 2000
         self.last_enemy = ''
 
 
@@ -39,11 +42,12 @@ class Level:
                     sort_enemy = 'enemy1' if sort_enemy == 'enemy2' else 'enemy2'
 
                 self.last_enemy = sort_enemy
-                new_enemy = EntityFactory.get_entity((sort_enemy))
+                new_enemy = EntityFactory.get_entity(sort_enemy)
                 self.entity_list.extend(new_enemy)
-                self.spawn_cooldown = random.randint(5000, 9000)
+                self.spawn_cooldown = random.randint(1000, 2500)
                 self.spawn_timer = 0
 
+            new_shots = []
             for ent in self.entity_list:
                 if ent is not None:
                     if hasattr(ent, 'update'):
@@ -52,18 +56,29 @@ class Level:
                     self.window.blit(source = ent.surf, dest = ent.rect)
                     ent.move()
 
+                    if isinstance(ent, (Player, Enemy)):
+                        shoot = ent.shoot()
+                        if shoot is not None:
+                            new_shots.append(shoot)
+                    if ent.name == 'player':
+                        self.level_text(14, f'Player - Health: {ent.health}', COLOR_WHITE, (10, 25))
+            if new_shots:
+                self.entity_list.extend(new_shots)
+            EntityMediator.verify_collision(self.entity_list)
+            EntityMediator.verify_health(self.entity_list)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: #Close window in the level1
                     pygame.quit()
                     sys.exit()
                 if event.type == EVENT_ENEMY:
-                    self.entity_list.append(EntityFactory.get_entity('Enemy1'))
+                    self.entity_list.extend(EntityFactory.get_entity('enemy1'))
 
             # Printed text
             self.level_text(14,f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', COLOR_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps() :.0f}', COLOR_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entitades: {len(self.entity_list)}', COLOR_WHITE, (10, WIN_HEIGHT - 20))
-            self.entity_list = [ent for ent in self.entity_list if ent is None or ent.rect.right > -100]
+            self.entity_list = [ent for ent in self.entity_list if ent is not None and ent.health > 0 and ent.rect.right > -100]
 
             pygame.display.flip()
         pass

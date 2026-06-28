@@ -1,4 +1,5 @@
-from Code.Const import ENTITY_SPEED, WIN_WIDTH
+from Code.Const import ENTITY_SPEED, WIN_WIDTH, ENTITY_SHOT_DELAY
+from Code.EnemyShot import EnemyShot
 from Code.Entity import Entity
 
 
@@ -6,6 +7,7 @@ class Enemy(Entity):
 
     def __init__(self, name: str, position: tuple, images: list):
         super().__init__(name, position)
+        self.shot_delay = ENTITY_SHOT_DELAY[self.name]
         self.images = images
         self.current_index = 0
         self.elapsed_time = 0
@@ -30,3 +32,9 @@ class Enemy(Entity):
         #If they go off-screen, they reappear on the right
         if self.rect.right < 0:
             self.rect.left = WIN_WIDTH + 100
+
+    def shoot(self):
+        self.shot_delay -= 1
+        if self.shot_delay == 0:
+            self.shot_delay = ENTITY_SHOT_DELAY[self.name]
+            return EnemyShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))

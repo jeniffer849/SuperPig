@@ -1,12 +1,15 @@
 import pygame.key
 
-from Code.Const import ENTITY_SPEED, WIN_WIDTH
+from Code.Const import ENTITY_SPEED, WIN_WIDTH, ENTITY_SHOT_DELAY, PLAYER_KEY_SHOOT
 from Code.Entity import Entity
+from Code.PlayerShot import PlayerShot
+
 
 class Player(Entity):
 
     def __init__(self, name: str, position: tuple, images_run: list, images_jump: list):
         super().__init__(name, position)
+        self.shot_delay = ENTITY_SHOT_DELAY[self.name]
 
         #left and right variables
         self.images_run = images_run
@@ -63,7 +66,7 @@ class Player(Entity):
             self.facing_left = True
 
         #jumping
-        if (pressed_key[pygame.K_SPACE] or pressed_key[pygame.K_UP]) and not self.is_jumping:
+        if (pressed_key[pygame.K_UP]) and not self.is_jumping:
             self.speed_y = self.jump_force
             self.is_jumping = True
             self.current_index = 0
@@ -81,3 +84,15 @@ class Player(Entity):
 
         if self.rect.left < 0:
                 self.rect.left = 0
+
+    def shoot(self):
+        self.shot_delay -= 1
+        if self.shot_delay == 0:
+            self.shot_delay = ENTITY_SHOT_DELAY[self.name]
+            pressed_key = pygame.key.get_pressed()
+            if pressed_key[PLAYER_KEY_SHOOT[self.name]]:
+                return PlayerShot(name=f'{self.name}Shot', position=(self.rect.centerx, self.rect.centery))
+            else:
+                return None
+        else:
+            return None
