@@ -1,4 +1,7 @@
 import pygame.image
+import ctypes
+ctypes.windll.shcore.SetProcessDpiAwareness(1)
+
 from pygame.font import Font
 import sys
 from pygame.rect import Rect
