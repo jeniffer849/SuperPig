@@ -4,7 +4,7 @@ import sys
 from pygame.rect import Rect
 from pygame.surface import Surface
 
-from Code.Const import MENU_OPTION, COLOR_WHITE, COLOR_YELLOW, COLOR_GREEN, WIN_WIDTH
+from Code.Const import MENU_OPTION, COLOR_WHITE, COLOR_YELLOW, COLOR_GREEN
 
 
 class Menu:
@@ -22,13 +22,15 @@ class Menu:
             # DRAW IMAGES
             self.window.blit(source=self.surf, dest=self.rect)
             self.menu_text(60, "Super Pig", COLOR_YELLOW, (center_x, 50))
+            self.menu_text(15, "Jeniffer Maira Soares - RU:5187609", COLOR_YELLOW, (center_x, 380))
+
 
 
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
-                    self.menu_text(40, MENU_OPTION[i], COLOR_GREEN, (center_x, 200 + 50 * i)) #Change color when you use key down, AND KEY UP
+                    self.menu_text(40, MENU_OPTION[i], COLOR_GREEN, (center_x, 150 + 50 * i)) #Change color when you use key down, AND KEY UP
                 else:
-                    self.menu_text(40, MENU_OPTION[i], COLOR_WHITE, (center_x, 200 + 50 * i))
+                    self.menu_text(40, MENU_OPTION[i], COLOR_WHITE, (center_x, 150 + 50 * i))
             pygame.display.flip()
 
             # Check for all events

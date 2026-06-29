@@ -67,7 +67,8 @@ ENTITY_SHOT_DELAY = {
 MENU_OPTION = ('NEW GAME',
                'CONTROLS',
                'SCORE',
-               'EXIT')
+               'EXIT'
+               )
 # P
 PLAYER_KEY_SHOOT = {'player': pygame.K_SPACE
                     }
@@ -77,17 +78,18 @@ WIN_WIDTH = 700
 WIN_HEIGHT = 394
 
 # S
-SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
-             'EnterName': (WIN_WIDTH / 2, 80),
-             'Label': (WIN_WIDTH / 2, 90),
-             'Name': (WIN_WIDTH / 2, 110),
-             0: (WIN_WIDTH / 2, 110),
-             1: (WIN_WIDTH / 2, 130),
-             2: (WIN_WIDTH / 2, 150),
-             3: (WIN_WIDTH / 2, 170),
-             4: (WIN_WIDTH / 2, 190),
-             5: (WIN_WIDTH / 2, 210),
-             6: (WIN_WIDTH / 2, 230),
-             7: (WIN_WIDTH / 2, 250),
-             8: (WIN_WIDTH / 2, 270),
-             9: (WIN_WIDTH / 2, 290),}
+SCORE_POS = {'Title1': (WIN_WIDTH / 2, 150),
+             'Title2': (WIN_WIDTH / 2, 90),
+             'EnterName': (WIN_WIDTH / 2, 200),
+             'Label': (WIN_WIDTH / 2, 150),
+             'Name': (WIN_WIDTH / 2, 250),
+             0: (WIN_WIDTH / 2, 190),
+             1: (WIN_WIDTH / 2, 210),
+             2: (WIN_WIDTH / 2, 230),
+             3: (WIN_WIDTH / 2, 250),
+             4: (WIN_WIDTH / 2, 270),
+             5: (WIN_WIDTH / 2, 290),
+             6: (WIN_WIDTH / 2, 310),
+             7: (WIN_WIDTH / 2, 330),
+             8: (WIN_WIDTH / 2, 350),
+             9: (WIN_WIDTH / 2, 370),}

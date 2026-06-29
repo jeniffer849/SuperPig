@@ -24,7 +24,7 @@ class Score:
         name = ''
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
-            self.score_text(50, 'GAME OVER!', (194, 22, 9), SCORE_POS['Title'])
+            self.score_text(50, 'GAME OVER!', (194, 22, 9), SCORE_POS['Title1'])
             if game_mode == MENU_OPTION[0]:
                 score = player_score
                 text = 'Enter player name (8 characters): '
@@ -45,7 +45,7 @@ class Score:
                     else:
                         if len(name) < 8:
                             name += event.unicode
-            self.score_text(30, name, COLOR_WHITE, SCORE_POS['Name'])
+            self.score_text(40, name, COLOR_WHITE, SCORE_POS['Name'])
 
             pygame.display.flip()
             pass
@@ -54,15 +54,15 @@ class Score:
         pygame.mixer_music.load('./Asset/Enchanted Festival.mp3')
         pygame.mixer_music.play(-1)
         self.window.blit(source=self.surf, dest=self.rect)
-        self.score_text(48, 'TOP 10 SCORE', COLOR_RED, SCORE_POS['Title'])
-        self.score_text(30, 'NAME            SCORE            DATE     ', COLOR_WHITE, SCORE_POS['Label'])
+        self.score_text(48, 'TOP 10 SCORE', COLOR_RED, SCORE_POS['Title2'])
+        self.score_text(30, 'NAME           SCORE           DATE     ', COLOR_WHITE, SCORE_POS['Label'])
         db_proxy = DBProxy('DBScore')
         list_score = db_proxy.retrieve_top10()
         db_proxy.close()
 
         for index, player_score in enumerate(list_score):
             id_, name, score, date = player_score
-            line_text = f'{name:<10}       {score:05d}      {date}'
+            line_text = f' {name:<10}         {score:05d}      {date}'
             self.score_text(30, line_text, COLOR_WHITE, SCORE_POS[list_score.index(player_score)])
 
         while True:
