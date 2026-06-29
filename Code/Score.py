@@ -1,6 +1,4 @@
 import sys
-import ctypes
-ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 from datetime import datetime
 
@@ -57,16 +55,28 @@ class Score:
         pygame.mixer_music.load('./Asset/Enchanted Festival.mp3')
         pygame.mixer_music.play(-1)
         self.window.blit(source=self.surf, dest=self.rect)
-        self.score_text(40, 'TOP 10 SCORE', COLOR_RED, SCORE_POS['Title2'])
-        self.score_text(30, 'NAME           SCORE           DATE     ', COLOR_WHITE, SCORE_POS['Label'])
+        self.score_text(35, 'TOP 10 SCORE', COLOR_RED, SCORE_POS['Title2'])
+        col_name_x = 80
+        col_score_x = 320
+        col_date_x = 480
+
+        y_label = SCORE_POS['Label'][1]
+        self.score_text(22, 'NAME', COLOR_WHITE, (col_name_x, y_label), align_left=True)
+        self.score_text(22, 'SCORE', COLOR_WHITE, (col_score_x, y_label), align_left=True)
+        self.score_text(22, 'DATE', COLOR_WHITE, (col_date_x, y_label), align_left=True)
+
         db_proxy = DBProxy('DBScore')
         list_score = db_proxy.retrieve_top10()
         db_proxy.close()
 
         for index, player_score in enumerate(list_score):
             id_, name, score, date = player_score
-            line_text = f'{name:<10}    {score:05d}    {date}'
-            self.score_text(30, line_text, COLOR_WHITE, SCORE_POS[list_score.index(player_score)])
+
+            pos_y = SCORE_POS[index][1]
+
+            self.score_text(18, f'{name}', COLOR_WHITE, (col_name_x, pos_y), align_left=True)
+            self.score_text(18, f'{score:05d}', COLOR_WHITE, (col_score_x, pos_y), align_left=True)
+            self.score_text(18, f'{date}', COLOR_WHITE, (col_date_x, pos_y), align_left=True)
 
         while True:
             for event in pygame.event.get():
@@ -79,10 +89,13 @@ class Score:
             pygame.display.flip()
 
 
-    def score_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+    def score_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple, align_left = False):
         text_font: Font = pygame.font.SysFont(name = "Lucida Sans Typewriter" , size = text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
-        text_rect: Rect = text_surf.get_rect(center=text_center_pos)
+        if align_left:
+            text_rect: Rect = text_surf.get_rect(left = text_pos[0], top = text_pos[1])
+        else:
+            text_rect: Rect = text_surf.get_rect(center=text_pos)
         self.window.blit(source=text_surf, dest=text_rect)
 
 def get_formatted_date():

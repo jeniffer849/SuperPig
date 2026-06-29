@@ -1,6 +1,4 @@
 import sys
-import ctypes
-ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
 from Code.Const import MENU_OPTION, WIN_WIDTH, WIN_HEIGHT
 from Code.Controls import Controls

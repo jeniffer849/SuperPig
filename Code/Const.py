@@ -78,18 +78,20 @@ WIN_WIDTH = 700
 WIN_HEIGHT = 394
 
 # S
-SCORE_POS = {'Title1': (WIN_WIDTH / 2, 150),
-             'Title2': (WIN_WIDTH / 2, 90),
-             'EnterName': (WIN_WIDTH / 2, 200),
-             'Label': (WIN_WIDTH / 2, 150),
-             'Name': (WIN_WIDTH / 2, 250),
-             0: (WIN_WIDTH / 2, 190),
-             1: (WIN_WIDTH / 2, 210),
-             2: (WIN_WIDTH / 2, 230),
-             3: (WIN_WIDTH / 2, 250),
-             4: (WIN_WIDTH / 2, 270),
-             5: (WIN_WIDTH / 2, 290),
-             6: (WIN_WIDTH / 2, 310),
-             7: (WIN_WIDTH / 2, 330),
-             8: (WIN_WIDTH / 2, 350),
-             9: (WIN_WIDTH / 2, 370),}
+SCORE_POS = {
+    'Title1': (WIN_WIDTH / 2, 100),
+    'EnterName': (WIN_WIDTH / 2, 180),
+    'Name': (WIN_WIDTH / 2, 250),
+    'Title2': (WIN_WIDTH / 2, 40),
+    'Label': (WIN_WIDTH / 2, 85),
+    0: (WIN_WIDTH / 2, 120),
+    1: (WIN_WIDTH / 2, 142),
+    2: (WIN_WIDTH / 2, 164),
+    3: (WIN_WIDTH / 2, 186),
+    4: (WIN_WIDTH / 2, 208),
+    5: (WIN_WIDTH / 2, 230),
+    6: (WIN_WIDTH / 2, 252),
+    7: (WIN_WIDTH / 2, 274),
+    8: (WIN_WIDTH / 2, 296),
+    9: (WIN_WIDTH / 2, 318),
+}
