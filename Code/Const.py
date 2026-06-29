@@ -1,5 +1,6 @@
 # C
 import pygame
+from pygame.examples.grid import WINDOW_WIDTH
 
 COLOR_YELLOW = (230, 191, 38)
 COLOR_WHITE = (255, 255, 255)
@@ -58,12 +59,13 @@ ENTITY_SCORE = {
     'enemy2Shot': 0
 }
 ENTITY_SHOT_DELAY = {
-    'player': 10,
+    'player': 6,
     'enemy1' : 30,
     'enemy2' : 30
 }
 # M
 MENU_OPTION = ('NEW GAME',
+               'CONTROLS',
                'SCORE',
                'EXIT')
 # P
@@ -73,3 +75,19 @@ PLAYER_KEY_SHOOT = {'player': pygame.K_SPACE
 # W
 WIN_WIDTH = 700
 WIN_HEIGHT = 394
+
+# S
+SCORE_POS = {'Title': (WIN_WIDTH / 2, 50),
+             'EnterName': (WIN_WIDTH / 2, 80),
+             'Label': (WIN_WIDTH / 2, 90),
+             'Name': (WIN_WIDTH / 2, 110),
+             0: (WIN_WIDTH / 2, 110),
+             1: (WIN_WIDTH / 2, 130),
+             2: (WIN_WIDTH / 2, 150),
+             3: (WIN_WIDTH / 2, 170),
+             4: (WIN_WIDTH / 2, 190),
+             5: (WIN_WIDTH / 2, 210),
+             6: (WIN_WIDTH / 2, 230),
+             7: (WIN_WIDTH / 2, 250),
+             8: (WIN_WIDTH / 2, 270),
+             9: (WIN_WIDTH / 2, 290),}

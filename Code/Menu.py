@@ -17,17 +17,18 @@ class Menu:
         menu_option = 0
         pygame.mixer_music.load('./Asset/Enchanted Festival.mp3')
         pygame.mixer_music.play(-1)
+        center_x = self.window.get_width() / 2
         while True:
             # DRAW IMAGES
             self.window.blit(source=self.surf, dest=self.rect)
-            self.menu_text(60, "Super Pig", COLOR_YELLOW, ((WIN_WIDTH / 2), 50))
+            self.menu_text(60, "Super Pig", COLOR_YELLOW, (center_x, 50))
 
 
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
-                    self.menu_text(40, MENU_OPTION[i], COLOR_GREEN, ((WIN_WIDTH / 2), 200 + 60 * i)) #Change color when you use key down, AND KEY UP
+                    self.menu_text(40, MENU_OPTION[i], COLOR_GREEN, (center_x, 200 + 50 * i)) #Change color when you use key down, AND KEY UP
                 else:
-                    self.menu_text(40, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 200 + 60 * i))
+                    self.menu_text(40, MENU_OPTION[i], COLOR_WHITE, (center_x, 200 + 50 * i))
             pygame.display.flip()
 
             # Check for all events

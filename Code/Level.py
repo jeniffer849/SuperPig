@@ -15,10 +15,11 @@ from Code.Player import Player
 
 class Level:
 
-    def __init__(self, window, name, game_mode):
+    def __init__(self, window, name, game_mode, player_score):
         self.window = window
         self.name = name
         self.game_mode = game_mode
+        self.player_score = player_score
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('summer'))
         self.entity_list.extend(EntityFactory.get_entity('player'))
@@ -64,6 +65,21 @@ class Level:
                 self.entity_list.extend(new_shots)
             EntityMediator.verify_collision(self.entity_list)
             EntityMediator.verify_health(self.entity_list)
+
+            self.timeout -= dt
+
+            #Look for the player in the list to see if they are still alive
+            active_player = False
+            for ent in self.entity_list:
+                if ent is not None and ent.name == 'player':
+                    active_player = True
+                    #Updates the Game.py score list with the player's current points
+                    self.player_score[0] = ent.score
+                    break
+
+            #DEFEAT CONDITION: If the player has disappeared from the list (died), the level ends
+            if not active_player:
+                return False
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: #Close window in the level1
