@@ -5,7 +5,7 @@ import pygame.display
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from Code.Const import COLOR_WHITE, WIN_HEIGHT, EVENT_ENEMY
+from Code.Const import WIN_HEIGHT, EVENT_ENEMY, COLOR_RED, COLOR_WHITE
 from Code.Enemy import Enemy
 from Code.Entity import Entity
 from Code.EntityFactory import EntityFactory
@@ -38,13 +38,11 @@ class Level:
             self.spawn_timer += dt
             if self.spawn_timer >= self.spawn_cooldown:
                 sort_enemy = random.choice(['enemy1', 'enemy2'])
-                if sort_enemy == self.last_enemy:
-                    sort_enemy = 'enemy1' if sort_enemy == 'enemy2' else 'enemy2'
 
                 self.last_enemy = sort_enemy
                 new_enemy = EntityFactory.get_entity(sort_enemy)
                 self.entity_list.extend(new_enemy)
-                self.spawn_cooldown = random.randint(1000, 2500)
+                self.spawn_cooldown = random.randint(1500, 3000)
                 self.spawn_timer = 0
 
             new_shots = []
@@ -61,7 +59,7 @@ class Level:
                         if shoot is not None:
                             new_shots.append(shoot)
                     if ent.name == 'player':
-                        self.level_text(14, f'Player - Health: {ent.health}', COLOR_WHITE, (10, 25))
+                        self.level_text(20, f'Player - Health: {ent.health} | Score: {ent.score}', COLOR_RED, (10, 25))
             if new_shots:
                 self.entity_list.extend(new_shots)
             EntityMediator.verify_collision(self.entity_list)
