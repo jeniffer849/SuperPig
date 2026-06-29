@@ -6,7 +6,7 @@ import pygame
 from pygame import Surface, Rect, KEYDOWN, K_RETURN, K_BACKSPACE, K_ESCAPE
 from pygame.font import Font
 
-from Code.Const import COLOR_WHITE, SCORE_POS, COLOR_RED, COLOR_GREEN, MENU_OPTION
+from Code.Const import COLOR_WHITE, SCORE_POS, COLOR_RED, MENU_OPTION
 from Code.DBProxy import DBProxy
 
 
@@ -23,13 +23,14 @@ class Score:
         pygame.mixer_music.play(-1)
         db_proxy = DBProxy('DBScore')
         name = ''
+        text = 'Enter player name (8 characters): '
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
-            self.score_text(50, 'GAME OVER!', (194, 22, 9), SCORE_POS['Title1'])
+            self.score_text(45, 'GAME OVER!', (194, 22, 9), SCORE_POS['Title1'])
             if game_mode == MENU_OPTION[0]:
                 score = player_score
-                text = 'Enter player name (8 characters): '
-            self.score_text(35, text, COLOR_WHITE, SCORE_POS['EnterName'])
+
+            self.score_text(24, text, COLOR_WHITE, SCORE_POS['EnterName'])
 
 
             for event in pygame.event.get():
@@ -46,7 +47,7 @@ class Score:
                     else:
                         if len(name) < 8:
                             name += event.unicode
-            self.score_text(40, name, COLOR_WHITE, SCORE_POS['Name'])
+            self.score_text(35, name, COLOR_WHITE, SCORE_POS['Name'])
 
             pygame.display.flip()
             pass

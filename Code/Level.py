@@ -23,7 +23,7 @@ class Level:
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('summer'))
         self.entity_list.extend(EntityFactory.get_entity('player'))
-        self.timeout = 20000 #20 Seconds
+        self.timeout = 50000 #20 Seconds
         self.spawn_timer = 2000
         self.spawn_cooldown = 2000
         self.last_enemy = ''
