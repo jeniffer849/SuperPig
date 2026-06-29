@@ -1,3 +1,5 @@
+import sys
+
 from Code.Const import MENU_OPTION, WIN_WIDTH, WIN_HEIGHT
 from Code.Controls import Controls
 from Code.Level import Level
@@ -35,7 +37,7 @@ class Game:
 
             elif menu_return == MENU_OPTION[3]:
                 pygame.quit()  # Close Window
-                quit()  # End Pygame
+                sys.exit()  # End Pygame
             else:
                 pass
 
